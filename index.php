@@ -1,6 +1,8 @@
 <?php 
 include 'includes/head.php';
 include 'includes/header.php';
+echo 'string';
+
 ?>
 
 <style type="text/css">
