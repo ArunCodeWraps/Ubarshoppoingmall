@@ -2350,3 +2350,7 @@ del:before{
 .checkout_page .billing_details{
   padding: 2rem;
 }
+
+.error{
+  color: red;
+}

@@ -7,10 +7,8 @@
           <ul class="newTopMenus">
             <li><a href="register.php">Become Member</a> </li>
             <li><a href="login.php">Sign In</a></li>
-            <li><a href="advertiser">Advertisers</a> </li>
-            <li><a href="buyers">Buyers</a></li>
-            <li><a href="sellers">Sellers</a></li>
-            <li><a href="help">Help</a></li>
+            <li><a href="#">Faq</a></li>
+            <li><a href="#">Help</a></li>
           </ul>
         </div>
       </div>
