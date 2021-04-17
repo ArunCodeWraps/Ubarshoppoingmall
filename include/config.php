@@ -6,7 +6,7 @@ error_reporting(0);
 $hostname = 'localhost';
 $username = 'root';
 $password ='';
-$db_name = 'poshmark';
+$db_name = 'usm';
 
 global $obj;
 		
@@ -15,7 +15,7 @@ require_once("db.class.php");
 require_once("variable.php");
 $obj = new DB($hostname, $username, $password, $db_name);
 $base_u = $_SERVER["REQUEST_URI"];
-@define('SITE_URL',"http://localhost/usm/");
+@define('SITE_URL',"http://localhost/USM/");
 @define('SITE_TITLE',"USM");
 $website_currency_code='<i class="fa fa-inr"></i>';
 $website_currency_symbol="&#8377";
