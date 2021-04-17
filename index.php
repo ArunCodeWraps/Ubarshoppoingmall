@@ -1,7 +1,6 @@
 <?php 
 include 'includes/head.php';
 include 'includes/header.php';
-echo 'string';
 
 ?>
 
@@ -50,93 +49,104 @@ echo 'string';
 			$hCatSql = $obj->query("select * from $tbl_category where status=1");
 			while($hCatResult = $obj->fetchNextObject($hCatSql)){?>
 				<li class="nav-item">
-				<a id="home2-tab" data-toggle="tab" href="#home<?php echo $hCatResult->id; ?>" role="tab" aria-controls="home2" aria-selected="true" class="nav-link text-capitalize rounded-0 <?php if($c==0){?> active <?php }?>"><?php echo $hCatResult->category; ?></a>
+				<a id="home2-tab" data-toggle="tab" href="#homee<?php echo $hCatResult->id; ?>" role="tab" aria-controls="home2" aria-selected="true" class="nav-link text-capitalize rounded-0 <?php if($c==0){?> active <?php }?>"><?php echo $hCatResult->category; ?></a>
 			</li>
 			<?php $c++;} ?>
 		</ul>
 
-		<div id="myTab2Content" class="tab-content">
-			<?php
-			$d=0;
-			$hCatSql1 = $obj->query("select * from $tbl_category where status=1");
-			while($hCatResult1 = $obj->fetchNextObject($hCatSql1)){?>
-			<div id="home<?php echo $hCatResult1->id; ?>" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade show <?php if($d==0){?> active <?php }?>">
-				<h4 class="navtitle">TOP SELLING BRANDS THIS WEEK</h4>
-				<?php
-				$brandSql = $obj->query("select * from $tbl_brand where cat_id='".$hCatResult1->id."' and status=1 order by id desc limit 0,6",-1);
-				?>
-				<div class="link_wrapper owl-carousel owl-arrows">
-					<div class="link_box">
-					<?php
-					$b=1;
-					while($brandResult = $obj->fetchNextObject($brandSql)){?>
-					
-						<a href="#" class="link_item">
-							<img src="https://dtpmhvbsmffsz.cloudfront.net/brands/2016/08/24/53d96e4f5632a02800000281/m_57bdf0e35632a0ad710000c1.jpg">
-							<div class="link_title"><?php echo $brandResult->brand; ?></div>
-						</a>
-						<?php
-						if($b%2==0){?>
-							</div>
-							<div class="link_box">
-						<?php } ?>
-						
-					</div>
-					<?php $b++;}?>
-				</div>
-			
-			</div>
-		<?php $d++; } ?>
 
+
+		<div id="myTab2Content" class="tab-content">
+
+			<?php
+			$c=0;
+			$hCatSql = $obj->query("select * from $tbl_category where status=1");
+			while($hCatResult = $obj->fetchNextObject($hCatSql)){?>
+
+			<div id="homee<?php echo $hCatResult->id; ?>" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade show <?php if($c==0){?> active <?php }?>">
+				<h4 class="navtitle">TOP SELLING BRANDS THIS WEEK</h4>
+				<div class="link_wrapper owl-carousel owl-arrows">
+					<?php
+						$d=0;
+						$brandArr=array();
+						$brandSql = $obj->query("select * from $tbl_brand where status=1 and cat_id='$hCatResult->id' order by id desc",-1);
+						while($brandResult = $obj->fetchNextObject($brandSql)){
+							$brandArr[]=$brandResult;
+						}
+						
+						$column = 2;
+						$rows = array_chunk($brandArr, $column);
+						foreach ($rows as $value) { ?>
+
+					<div class="link_box">
+						<a href="#" class="link_item">
+							<img src="upload_images/brand/<?php echo $value[0]->logo ?>">
+							<div class="link_title"><?php echo $value[0]->brand ?></div>
+						</a>
+						<a href="#" class="link_item">
+							<img src="upload_images/brand/<?php echo $value[1]->logo ?>">
+							<div class="link_title"><?php echo $value[1]->brand ?></div>
+						</a>
+					</div>
+
+				<?php } ?>
+					
+				</div>
+			</div>
+
+			<?php $c++;} ?>
 			
 		</div>
+
+
+
+
+		
 
 
 		<div class="title mt-1">
 			<h4 class="navtitle">TRENDING NOW</h4>
 			<div class="table_wrapper owl-carousel owl-arrows">
-				<div class="link_box">
-					<table class="table">
-						<tbody>
-							<tr>
-								<td><span class="number-circle">1</span> Mark</td>
-								<td><span class="number-circle">1</span> Mark</td>
-								<td><span class="number-circle">1</span> Mark</td>
-							</tr>
-							<tr>
-								<td><span class="number-circle">1</span> Jacob</td>
-								<td><span class="number-circle">1</span> Jacob</td>
-								<td><span class="number-circle">1</span> Jacob</td>
-							</tr>
-							<tr>
-								<td><span class="number-circle">1</span> Larry</td>
-								<td><span class="number-circle">1</span> Larry</td>
-								<td><span class="number-circle">1</span> Larry</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="link_box">
-					<table class="table">
-						<tbody>
-							<tr>
-								<td><span class="number-circle">1</span> Mark</td>
-								<td><span class="number-circle">1</span> Mark</td>
-								<td><span class="number-circle">1</span> Mark</td>
-							</tr>
-							<tr>
-								<td><span class="number-circle">1</span> Jacob</td>
-								<td><span class="number-circle">1</span> Jacob</td>
-								<td><span class="number-circle">1</span> Jacob</td>
-							</tr>
-							<tr>
-								<td><span class="number-circle">1</span> Larry</td>
-								<td><span class="number-circle">1</span> Larry</td>
-								<td><span class="number-circle">1</span> Larry</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+
+				<?php
+						$d=0;
+						$brandArr=array();
+						$brandSql = $obj->query("select * from $tbl_brand where status=1 order by id desc",-1);
+						while($brandResult = $obj->fetchNextObject($brandSql)){
+							$brandArr[]=$brandResult;
+						}
+						
+						$column = 9;
+						$rows = array_chunk($brandArr, $column);
+						$num=1;
+						foreach ($rows as $value) { ?>
+
+								<div class="link_box">
+									<table class="table">
+										<tbody>
+											<tr>
+												<td><span class="number-circle"><?php echo $num+0; ?></span> <?php echo $value[0]->brand ?></td>
+												<td><span class="number-circle"><?php echo $num+1; ?></span> <?php echo $value[1]->brand ?></td>
+												<td><span class="number-circle"><?php echo $num+2; ?></span> <?php echo $value[2]->brand ?></td>
+											</tr>
+											<tr>
+												<td><span class="number-circle"><?php echo $num+3; ?></span> <?php echo $value[3]->brand ?></td>
+												<td><span class="number-circle"><?php echo $num+4; ?></span> <?php echo $value[4]->brand ?></td>
+												<td><span class="number-circle"><?php echo $num+5; ?></span> <?php echo $value[5]->brand ?></td>
+											</tr>
+											<tr>
+												<td><span class="number-circle"><?php echo $num+6; ?></span> <?php echo $value[6]->brand ?></td>
+												<td><span class="number-circle"><?php echo $num+7; ?></span> <?php echo $value[7]->brand ?></td>
+												<td><span class="number-circle"><?php echo $num+8; ?></span> <?php echo $value[8]->brand ?></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+
+							<?php $num=$num+9; } ?>	
+
+				
 			</div>
 		</div>
 	</div>
