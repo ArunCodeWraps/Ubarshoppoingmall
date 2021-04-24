@@ -20,7 +20,7 @@ $myRols=explode(",",$rsU->roles);
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
       <?php if(in_array(1,$myRols) || in_array(2,$myRols) || in_array(3,$myRols) || in_array(4,$myRols) || in_array(5,$myRols)){ ?>
-        <li class="treeview <?php echo  (basename($_SERVER['SCRIPT_NAME'])=='banner-list.php' || basename($_SERVER['SCRIPT_NAME'])=='banner-addf.php' || basename($_SERVER['SCRIPT_NAME'])=='unit-list.php' || basename($_SERVER['SCRIPT_NAME'])=='unit-addf.php' || basename($_SERVER['SCRIPT_NAME'])=='social-list.php' || basename($_SERVER['SCRIPT_NAME'])=='social-addf.php' || basename($_SERVER['SCRIPT_NAME'])=='order_status-list.php' || basename($_SERVER['SCRIPT_NAME'])=='update-setting.php' || basename($_SERVER['SCRIPT_NAME'])=='fiesta-banner-list.php' || basename($_SERVER['SCRIPT_NAME'])=='fiesta-banner-addf.php')?'active' :'' ?>">
+        <li class="treeview <?php echo  (basename($_SERVER['SCRIPT_NAME'])=='banner-list.php' || basename($_SERVER['SCRIPT_NAME'])=='banner-addf.php' || basename($_SERVER['SCRIPT_NAME'])=='unit-list.php' || basename($_SERVER['SCRIPT_NAME'])=='unit-addf.php' || basename($_SERVER['SCRIPT_NAME'])=='social-list.php' || basename($_SERVER['SCRIPT_NAME'])=='social-addf.php' || basename($_SERVER['SCRIPT_NAME'])=='order_status-list.php' || basename($_SERVER['SCRIPT_NAME'])=='update-setting.php' || basename($_SERVER['SCRIPT_NAME'])=='fiesta-banner-list.php' || basename($_SERVER['SCRIPT_NAME'])=='fiesta-banner-addf.php' || basename($_SERVER['SCRIPT_NAME'])=='color-addf.php' || basename($_SERVER['SCRIPT_NAME'])=='color-list.php')?'active' :'' ?>">
           <a href="javascript:void(0);">
             <i class="fa fa-cogs"></i> <span>Admin Setting</span>
             <span class="pull-right-container">
@@ -41,6 +41,9 @@ $myRols=explode(",",$rsU->roles);
             <?php }?>
             <?php if(in_array(5,$myRols)){ ?>
               <li class="<?php echo (basename($_SERVER['SCRIPT_NAME'])=='update-setting.php')?'active' :'' ?>"><a href="update-setting.php"><i class="fa fa-circle-o"></i>Update Setting</a></li>
+            <?php }?>
+            <?php if(in_array(21,$myRols)){ ?>
+              <li class="<?php echo (basename($_SERVER['SCRIPT_NAME'])=='color-addf.php' || basename($_SERVER['SCRIPT_NAME'])=='color-list.php')?'active' :'' ?>"><a href="color-list.php"><i class="fa fa-circle-o"></i>Manage Color</a></li>
             <?php }?>
           </ul>
         </li>

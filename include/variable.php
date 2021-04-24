@@ -10,6 +10,7 @@ $tbl_coupon='tbl_coupon';
 $tbl_country='tbl_country';
 $tbl_coupon_offer='tbl_coupon_offer';
 $tbl_credit='tbl_credit';
+$tbl_color='tbl_color';
 $tbl_enquiry='tbl_enquiry';
 $tbl_faq='tbl_faq';
 $tbl_faqcat='tbl_faqcat';
