@@ -82,6 +82,7 @@ if($_REQUEST['submitForm']=='yes'){
   $sell_price=$obj->escapestring($_REQUEST['sell_price']);
   $in_stock=$obj->escapestring($_REQUEST['in_stock']);
   $price_id=$obj->escapestring($_REQUEST['price_id']);
+  $color_id=$obj->escapestring($_REQUEST['color_id']);
 
 
   $PSql = "";
@@ -119,8 +120,9 @@ if($_REQUEST['submitForm']=='yes'){
   if($fileNameNew!=''){
     $PSql .=",pphoto='$fileNameNew'";
   }
-
-  
+  if($color_id!=''){
+    $PSql .=",color_id='$color_id'";
+  }
 
   if($_REQUEST['id']==''){
     $sql="insert into $tbl_productprice set $PSql ";
@@ -237,7 +239,20 @@ if($_REQUEST['id']!=''){
                     <input name="sell_price" type="text" id="sell_price" class="required form-control" value="<?php echo stripslashes($result->sell_price);?>" />
                   </div>
                 </div>
+                <div class="col-md-3">
+                  <div class="form-group">  
+                    <label>Color</label>
 
+                    <select name="color_id" id="color_id" class="required form-control">
+                      <option value="">Select Color</option>
+                      <?php 
+                      $colorSql=$obj->query("select * from $tbl_color where status=1");
+                      while($colorResult = $obj->fetchNextObject($color_id)){?>
+                        <option value="<?php echo $colorResult->id;?>" <?php if($colorResult->id==$result->color_id){?> selected <?php } ?>><?php echo $colorResult->color_name;?></option>
+                      <?php }?>
+                    </select>
+                  </div>
+                </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Or Upload New Image<br/>
