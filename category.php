@@ -1,6 +1,18 @@
 <?php 
 include 'includes/head.php';
 include 'includes/header.php';
+
+
+if (!empty($_REQUEST['brandslug'])) {
+	echo 'brand';
+}
+
+if (!empty($_REQUEST['catslug'])) {
+	echo 'cate';
+}
+
+
+
 ?>
 
 <style type="text/css">

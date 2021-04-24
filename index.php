@@ -79,12 +79,12 @@ include 'includes/header.php';
 						foreach ($rows as $value) { ?>
 
 					<div class="link_box">
-						<a href="#" class="link_item">
+						<a href="brand/<?php echo $value[0]->slug ?>" class="link_item">
 							<img src="upload_images/brand/<?php echo $value[0]->logo ?>">
 							<div class="link_title"><?php echo $value[0]->brand ?></div>
 						</a>
 						<?php if(!empty($value[1]->brand)){ ?>
-						<a href="#" class="link_item">
+						<a href="brand/<?php echo $value[1]->slug ?>" class="link_item">
 							<img src="upload_images/brand/<?php echo $value[1]->logo ?>">
 							<div class="link_title"><?php echo $value[1]->brand ?></div>
 						</a>
