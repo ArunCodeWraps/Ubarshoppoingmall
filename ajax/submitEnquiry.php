@@ -127,4 +127,51 @@ if($_REQUEST['forgotBtn']=='yes'){
   header("location:".SITE_URL."reset-password.php");
   }
 }
+
+
+
+
+if($_REQUEST['editprofilebtn']=='yes'){
+  $fname = $obj->escapestring($_REQUEST['fname']);
+  $lname = $obj->escapestring($_REQUEST['lname']);
+  $email = $obj->escapestring($_REQUEST['email']);
+  $mobile = $obj->escapestring($_REQUEST['mobile']);
+  $gender = $obj->escapestring($_REQUEST['gender']);
+  $country_id = $obj->escapestring($_REQUEST['country_id']);
+
+  $obj->query("update $tbl_user set name='$fname',surname='$lname',email='$email',mobile='$mobile',gender='$gender',country_id='$country_id' where id='".$_SESSION['user_id']."'",$debug=-1); //die;
+
+  $_SESSION['succ_msg'] = "Your profile is successfullly updated.";
+  header("location:".SITE_URL."dashboard.php");
+  exit;
+ 
+}
+
+if($_REQUEST['changepasswordbtn']=='yes'){
+  $old_password=$obj->escapestring($_POST['old_password']);
+  $new_password=$obj->escapestring($_POST['new_password']);
+  $confirm_password=$obj->escapestring($_POST['confirm_password']);
+
+  if($new_password==$confirm_password){
+    $query=$obj->query("select * from $tbl_user where id=".$_SESSION['user_id'],$debug=-1);
+    $result=$obj->fetchNextObject($query);
+
+    if($old_password!=$result->pass){ 
+     $_SESSION['err_msg']='Old Password is Wrong !';
+     header("location:".SITE_URL."change-password.php");
+     exit;
+    }else{
+      $obj->query("update $tbl_user set pass='$new_password' where id=".$_SESSION['user_id']);
+      $_SESSION['err_msg']='Your password has been updated successfully !';
+      header("location:".SITE_URL."change-password.php");
+     exit;
+    }
+  }else{
+    $_SESSION['err_msg']='Both password are not same!';
+     header("location:".SITE_URL."change-password.php");
+     exit;
+  }
+ 
+}
+
 ?>

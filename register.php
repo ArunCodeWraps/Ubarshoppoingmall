@@ -5,6 +5,10 @@ include 'includes/header.php';
 
 $cart =& $_SESSION['cart'];
 if(!is_object($cart)) $cart = new wfCart();
+
+if(isset($_SESSION['user_id'])){
+	header("location:dashboard.php");
+}
 ?>
 <style type="text/css">
     .megamenu{display: none;}
@@ -58,9 +62,12 @@ if(!is_object($cart)) $cart = new wfCart();
 	    </div>
 	    <div class="form-group input-group">
 			<select name="country_id" id="country_id" class="form-control required">
-				<option value="1" <?php if(!empty($_SESSION['gender'])){ if($_SESSION['gender']==1){ echo "selected"; } } ?>> United states</option>
-				<option value="2" <?php if(!empty($_SESSION['gender'])){ if($_SESSION['gender']==2){ echo "selected"; } } ?>>Canada</option>
-				<option value="3" <?php if(!empty($_SESSION['gender'])){ if($_SESSION['gender']==3){ echo "selected"; } } ?>>Australia</option>
+				 <option value="" selected="">Select Country</option>
+				<?php
+				$csql = $obj->query("select * from $tbl_country where status=1");
+				while($cResult = $obj->fetchNextObject($csql)){?>
+					<option value="<?php echo $cResult->id; ?>" <?php if(!empty($_SESSION['gender'])){ if($_SESSION['gender']==$cResult->id){ echo "selected"; } } ?>><?php echo $cResult->country; ?></option>
+				<?php } ?>
 			</select>
 			<small>The country you select will be saved as your default shopping experience. If you sell an item, this is where it will ship from.</small>
 		</div>

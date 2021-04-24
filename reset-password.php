@@ -5,6 +5,11 @@ include 'includes/header.php';
 
 $cart =& $_SESSION['cart'];
 if(!is_object($cart)) $cart = new wfCart();
+
+if(isset($_SESSION['user_id'])){
+	header("location:dashboard.php");
+}
+
 ?>
 
 <style type="text/css">

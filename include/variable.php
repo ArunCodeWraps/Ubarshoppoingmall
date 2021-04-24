@@ -7,6 +7,7 @@ $tbl_category='tbl_category';
 $tbl_comment='tbl_comment';
 $tbl_content='tbl_content';
 $tbl_coupon='tbl_coupon';
+$tbl_country='tbl_country';
 $tbl_coupon_offer='tbl_coupon_offer';
 $tbl_credit='tbl_credit';
 $tbl_enquiry='tbl_enquiry';

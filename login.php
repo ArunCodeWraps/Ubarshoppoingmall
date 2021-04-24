@@ -5,6 +5,10 @@ include 'includes/header.php';
 
 $cart =& $_SESSION['cart'];
 if(!is_object($cart)) $cart = new wfCart();
+
+if(isset($_SESSION['user_id'])){
+	header("location:dashboard.php");
+}
 ?>
 
 <style type="text/css">
@@ -42,7 +46,7 @@ if(!is_object($cart)) $cart = new wfCart();
 				 <button type="submit" class="btn btn-primary w-100">Login</button>
 			 </div>
 				 <div class="haveaccount">
-				 	<p>Don't have an account? <a href="sign-up.php" class="ml-1">Sign Up »</a></p>
+				 	<p>Don't have an account? <a href="register.php" class="ml-1">Sign Up »</a></p>
 				 </div>
 	   </div>
 	</form>

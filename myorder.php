@@ -1,152 +1,111 @@
 <?php 
+include("wfcart.php");
 include 'includes/head.php';
 include 'includes/header.php';
+
+$cart =& $_SESSION['cart'];
+if(!is_object($cart)) $cart = new wfCart();
+
+if(empty($_SESSION['user_id'])){
+header("location:login.php");
+}
+
+$sql = $obj->query("select * from $tbl_user where id='".$_SESSION['user_id']."'");
+$result = $obj->fetchNextObject($sql);
 ?>
-
 <link rel="stylesheet" type="text/css" href="css/dashboard.css">
-
 <style type="text/css">
 body{
 background: #fff;
 }
 </style>
-
 <section class="spacingY">
 <div class="content">  
 <div class="container">
 <div class="row">
-<div class="col-md-3 col-sm-3 col-xs-12">
-
-<div class="categoryflx">
-<form id="uploadimage" action="" method="post" enctype="multipart/form-data">
-<div class="upload-file-flx">                   
-<figure class="m-0">
-<img id="previewing" src="img/upload-pic.jpg">
-</figure>
-<div class="clr"></div>
-</div>
-<div class="upload-head">
-<h1 id="selectImage"><input type="file" name="file" id="file" required="">Add Profile Photo</h1>
-<div class="clr"></div>
-</div>
-<input type="submit" value="Upload" class="submit mysubtbtncls" style="display: none;">
-<div id="message"></div>
-</form>
-<h4 id="loading" style="display: none;">loading..</h4>
-
-<h2>User Dashboard</h2>
-<div class="catelistinner">
-<ul class="categorylist">
-<li><a href="myaccount.php">User Dashboard </a></li>
-<li><a href="edit-profile.php">Edit Profile </a></li>
-<li><a href="product-list.php">Products </a></li>
-<li><a href="myinquiry.php">Order List </a></li>
-<li><a href="company-detail.php">Company detail </a></li>
-<li><a href="change-password.php">Change Password</a></li>
-<li><a href="support.php">Support</a></li>
-<li><a href="logout.php">Logout</a></li>
-</ul>                     
-
-</div>
-</div>    
-</div>
-
+<?php include("side-menu.php"); ?>
 <div class="col-md-9 col-sm-9 col-xs-12">
 <div class="detailpro">
 <div class="companyInfo">
 <div class="companyTitle" style="float:none;">
-<h4>Order List</h4>
+<h4>My Order List</h4>
 </div>
 <div class="col-md-12 col-sm-12 col-xs-12">                          
 <div class="mainflx">
 <div class="tabArea">
 <div class="tabSectiion">
-	<div class="panel with-nav-tabs panel-primary">
-		<div class="panel-heading">
-			<ul class="nav nav-tabs">
-				<li class="active"><a aria-expanded="true" href="#tab1primary" data-toggle="tab">New Order</a></li>
-				<li class=""><a aria-expanded="false" href="#tab2primary" data-toggle="tab">Cancel Order</a></li>
-				<li class=""><a aria-expanded="false" href="#tab3primary" data-toggle="tab">Delivered Order</a></li>
-			</ul>
-		</div>
-		<div class="panel-body">
-			<div class="tab-content">
-				<div class="tab-pane fade active in show" id="tab1primary">
-					<form name="frm" method="post" action="myinquiry-del.php" enctype="multipart/form-data">
-						<input type="hidden" name="what" value="what">
-						<div class="tab-flx">                                                     
-							<div class="mainflx">
-								<div class="col-xs-3">Select: <a href="javascript:void(0);" class="" type="button"> All  None</a> </div>
-								<div class="col-xs-6 col-md-offset-3" style="text-align:right">
-				
+<div class="panel with-nav-tabs panel-primary">
+ <form name="frm" method="post" action="product-del.php" enctype="multipart/form-data">
+            <div class="box">
+              <div class="box-body">
+                <table id="active-order" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>SNo.</th>
+                      <th>Order Date/Time</th>
+                      <th>Order  ID</th>
+                      <th>Amount</th>
+                      <th>M/P</th>
+                      <th>Name/Mobile</th>
+                      <th>Ship Address</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $i=1;
+                    $sql=$obj->query("select * from $tbl_order where 1=1 and order_status in (1,2) order by id asc",$debug=-1);
+                    while($line=$obj->fetchNextObject($sql)){?>
+                      <tr>
+                        <td><?php echo $i; ?></td>
+                        <td>
+                        <?php 
+                          echo date('d M Y H:i',strtotime($line->order_date)); ?><br/><?php echo CalculateOrderTime($line->order_date); 
+                         ?>
+                       
+                        </td>
+                        <td><?php echo stripslashes($line->orderno); ?></td>
+                        <td><?php echo stripslashes($line->orderno); ?></td>
+                        <td><?php echo $website_currency_symbol." ".number_format($line->total_amount,0); ?></td>
+                        <td align="center">
+                            <?php echo stripslashes($line->payment_method);?> /
+                            <?php if($line->payment_status==1){ echo "Paid"; }else{ echo "Unpaid"; }?>
+                        </td>
+                        <script>
+                          $(document).ready(function(){
+                            $(".iframeOrder<?php echo $line->id; ?>").colorbox({iframe:true, width:"900px;", height:"800px;", frameborder:"0",scrolling:true});
+                            $(".iframeAddc<?php echo $line->id; ?>").colorbox({iframe:true, width:"700px;", height:"500px;", frameborder:"0",scrolling:true});
+                            $(".iframeViewc<?php echo $line->id; ?>").colorbox({iframe:true, width:"800px;", height:"600px;", frameborder:"0",scrolling:true});
+                            
+                            $(".iframeViewusercomm<?php echo $line->id; ?>").colorbox({iframe:true, width:"700px;", height:"500px;", frameborder:"0",scrolling:true});
+                            
+                          });
+                        </script>
+                        <td><?php echo getField('name',$tbl_user,$line->user_id)." ".getField('surname',$tbl_user,$line->user_id); ?></br>
+                        <?php echo getField('mobile',$tbl_user,$line->user_id); ?></br>
+                        </td>
+                         <td><?php echo stripslashes($line->ship_address); ?></td>
+                        <td>
+                          <a href="vieworder-detail.php?order_id=<?php echo $line->id; ?>" class="btn btn-primary iframeOrder<?php echo $line->id; ?>" title="View Details">
+                            <i class="fa fa-eye"></i></a>
+                            <a href="addcommets.php?order_id=<?php echo $line->id; ?>"  class="btn btn-primary iframeAddc<?php echo $line->id; ?>" title="Add Comment">
+                                <i class="fa fa-plus"></i></a>
+                          </td>
+                        </tr>
+                        <?php $i++; }?>
 
-</div>
+                      </tbody>
 
-<div class="clr"></div>
-</div>
+                      <tfoot>
+                      </tfoot>
 
-<div class="productdetailTable">
-<div class="comContactTable">
-<table class="table">
-<tbody>
-<tr>
-<th></th>
-<th><input name="check_all" type="checkbox" id="check_all" onclick="checkall(this.form)" value="check_all"></th>
-<th>Order Date</th>
-<th>Order Id</th>
-<th class="pcom">Amount</th>
-<th class="pdate">Method of Payment</th>
-<th class="pdate">Name & Email</th>
-</tr>
+                    </table>
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+              </form>
 
-</tbody>
-</table>
-
-<div class="clr"></div> 
-</div>                                                    
-<div class="clr"></div>
-</div>
-</div>
-</form>
-</div>                                
-
-<div class="tab-pane fade" id="tab2primary">
-<form name="frm" method="post" action="myinquiry-del.php" enctype="multipart/form-data">
-<input type="hidden" name="what" value="what">
-<div class="tab-flx">                                                     
-<div class="mainflx">
-<div class="col-xs-3">Select: <a href="javascript:void(0);" class="" type="button"> All  None</a> </div>
-
-
-<div class="clr"></div>
-</div>
-
-<div class="productdetailTable">
-<div class="comContactTable">
-<table class="table">
-<tbody>
-<tr>
-<th></th>
-<th><input name="check_all" type="checkbox" id="check_all" onclick="checkall(this.form)" value="check_all"></th>
-<th>Order Date</th>
-<th>Order Id</th>
-<th class="pcom">Amount</th>
-<th class="pdate">Method of Payment</th>
-<th class="pdate">Name & Email</th>
-</tr>
-
-</tbody>
-</table>
-
-<div class="clr"></div> 
-</div>                                                    
-<div class="clr"></div>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -159,10 +118,12 @@ background: #fff;
 </div>
 </div>
 </section>
-
-
-
-
 <?php 
 include 'includes/footer.php';
 ?>
+<script src="js/jquery.dataTables.min.js"></script>
+<script>
+  $(function () {
+    $("#productlist").DataTable();
+  });
+</script>

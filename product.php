@@ -1,6 +1,11 @@
 <?php 
 include 'includes/head.php';
 include 'includes/header.php';
+$product_id=$_GET['id'];
+$pSql = $obj->query("select * from $tbl_product where id='".$product_id."' ",$debug=-1);
+$pResult = $obj->fetchNextObject($pSql);
+$ppSql = $obj->query("select * from $tbl_productprice where product_id='".$product_id."' and status=1 order by display_order asc ",$debug=-1);
+$ppResult = $obj->fetchNextObject($ppSql);
 ?>
 
 <section class="main_category detail_page">
@@ -11,7 +16,7 @@ include 'includes/header.php';
 				  <ol class="breadcrumb">
 				    <li class="breadcrumb-item"><a href="#">Home</a></li>
 				    <li class="breadcrumb-item"><a href="#">CATEGORIES</a></li>
-				    <li class="breadcrumb-item active" aria-current="page">Product</li>
+				    <li class="breadcrumb-item active" aria-current="page"><?php echo $pResult->product_name; ?></li>
 				  </ol>
 				</nav>
 			</div>
@@ -68,7 +73,7 @@ include 'includes/header.php';
 			<div class="col-md-6">
 				<div class="product-dtl">
 					<div class="product-info">
-						<div class="product-name">LULULEMON 2-In-One Mesh Tank Top heathered gray 8</div>
+						<div class="product-name"><?php echo $pResult->product_name; ?></div>
 						<div class="reviews-counter">
 							<div class="rate">
 								<input type="radio" id="star5" name="rate" value="5" checked />

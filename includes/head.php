@@ -22,5 +22,6 @@ include("include/functions.php");
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:ital,wght@1,300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/jquery.dataTables.min.css">
 </head>
 <body>

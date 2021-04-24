@@ -70,7 +70,7 @@ validate_admin();
 											?>
 											<tr>
 
-												<td><?php echo stripslashes($line->size)."&nbsp;"; echo stripslashes($res->name_en);?></td>
+												<td><?php echo stripslashes($line->size)."&nbsp;"; echo stripslashes($res->name);?></td>
 												<td>
 													<?php echo '<strong>Actual: </strong>'.$website_currency_symbol." ".stripslashes($line->actual_price); ?><br/>
 													<?php echo '<strong>MRP: </strong>'.$website_currency_symbol." ".stripslashes($line->mrp_price); ?><br/>

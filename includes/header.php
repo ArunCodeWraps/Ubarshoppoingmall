@@ -5,8 +5,13 @@
         <div class="col-xs-12 col-sm-4 wel">Welcome to Uber Shoping Mall</div>
         <div class="col-xs-12 col-sm-8 text-right topmenu"> 
           <ul class="newTopMenus">
-            <li><a href="register.php">Become Member</a> </li>
-            <li><a href="login.php">Sign In</a></li>
+          	<?php
+          	if(!empty($_SESSION['user_id'])){?>
+          		<li><a href="dashboard.php">My Account</a> </li>
+          	<?php }else{?>
+          		<li><a href="register.php">Become Member</a> </li>
+            	<li><a href="login.php">Sign In</a></li>
+          	<?php }?>            
             <li><a href="#">Faq</a></li>
             <li><a href="#">Help</a></li>
           </ul>
