@@ -73,7 +73,7 @@
           <?php $catSql = $obj->query("select * from tbl_category where status=1  order by id asc",-1);
             while($catResult = $obj->fetchNextObject($catSql)){  ?> 
               <li class="nav-item dropdown has-mega-menu" style="position:static;">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $catResult->category ?></a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="category/<?php echo $catResult->slug ?>" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $catResult->category ?></a>
             <div class="dropdown-menu">
               <div class="px-0">
                 <div class="row">
@@ -81,12 +81,12 @@
                     while($subCatResult = $obj->fetchNextObject($subcatSql)){  ?> 
                   <div class="col-md-3">
                     <div class="dropdown-items">
-                      <h5><?php echo $subCatResult->subcategory ?></h5>
+                      <h5><a href="category/<?php echo $subCatResult->slug ?>"> <?php echo $subCatResult->subcategory ?></a></h5>
 
                       <?php $subsubcatSql = $obj->query("select * from tbl_subsubcategory where status=1 and subcat_id='$subCatResult->id' order by id asc",-1);
                     while($subSubCatResult = $obj->fetchNextObject($subsubcatSql)){  ?> 
 
-                        <a class="dropdown-item" href="#"><?php echo $subSubCatResult->subsubcategory ?></a>
+                        <a class="dropdown-item" href="category/<?php echo $subSubCatResult->slug ?>"><?php echo $subSubCatResult->subsubcategory ?></a>
                     <?php } ?>
                     </div>
                   </div>
