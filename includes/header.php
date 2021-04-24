@@ -5,13 +5,13 @@
         <div class="col-xs-12 col-sm-4 wel">Welcome to Uber Shoping Mall</div>
         <div class="col-xs-12 col-sm-8 text-right topmenu"> 
           <ul class="newTopMenus">
-          	<?php
-          	if(!empty($_SESSION['user_id'])){?>
-          		<li><a href="dashboard.php">My Account</a> </li>
-          	<?php }else{?>
-          		<li><a href="register.php">Become Member</a> </li>
-            	<li><a href="login.php">Sign In</a></li>
-          	<?php }?>            
+            <?php
+            if(!empty($_SESSION['user_id'])){?>
+              <li><a href="dashboard.php">My Account</a> </li>
+            <?php }else{?>
+              <li><a href="register.php">Become Member</a> </li>
+              <li><a href="login.php">Sign In</a></li>
+            <?php }?>            
             <li><a href="#">Faq</a></li>
             <li><a href="#">Help</a></li>
           </ul>
@@ -70,74 +70,85 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ul-hover">
-          <?php 
-            for ($i=0; $i < 8 ; $i++) { ?> 
+          <?php $catSql = $obj->query("select * from tbl_category where status=1  order by id asc",-1);
+            while($catResult = $obj->fetchNextObject($catSql)){  ?> 
               <li class="nav-item dropdown has-mega-menu" style="position:static;">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accessories</a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $catResult->category ?></a>
             <div class="dropdown-menu">
-              <div class="px-0 container">
+              <div class="px-0">
                 <div class="row">
-                  <div class="col-md-2">
+                  <?php $subcatSql = $obj->query("select * from tbl_subcategory where status=1 and cat_id='$catResult->id' order by id asc",-1);
+                    while($subCatResult = $obj->fetchNextObject($subcatSql)){  ?> 
+                  <div class="col-md-3">
                     <div class="dropdown-items">
-                      <h5>Accessories</h5>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <a class="dropdown-item" href="#">Or a link</a>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
+                      <h5><?php echo $subCatResult->subcategory ?></h5>
+
+                      <?php $subsubcatSql = $obj->query("select * from tbl_subsubcategory where status=1 and subcat_id='$subCatResult->id' order by id asc",-1);
+                    while($subSubCatResult = $obj->fetchNextObject($subsubcatSql)){  ?> 
+
+                        <a class="dropdown-item" href="#"><?php echo $subSubCatResult->subsubcategory ?></a>
+                    <?php } ?>
                     </div>
                   </div>
-                  <div class="col-md-2">
-                    <div class="dropdown-items">
-                      <h5>Accessories</h5>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <a class="dropdown-item" href="#">Or a link</a>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="dropdown-items">
-                      <h5>Accessories</h5>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <a class="dropdown-item" href="#">Or a link</a>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="dropdown-items">
-                      <h5>Accessories</h5>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <a class="dropdown-item" href="#">Or a link</a>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="dropdown-items">
-                      <h5>Accessories</h5>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <a class="dropdown-item" href="#">Or a link</a>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </div>
-                  </div>
+                  <?php } ?>
                 </div>
               </div>
             </div>
           </li>
-          <?php }
-           ?>
+          <?php } ?>
+
+
+          <li class="nav-item dropdown has-mega-menu" style="position:static;">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Brands</a>
+            <div class="dropdown-menu">
+              <div class="px-0">
+                <div class="row">
+                   
+                  <div class="col-md-3">
+                    <div class="dropdown-items">
+                      <h5>Women Brands</h5>
+                      <?php $womenBrandSql = $obj->query("select * from tbl_brand where status=1 and cat_id='3' order by id asc limit 0,10",-1);
+                       while($womenBrandResult = $obj->fetchNextObject($womenBrandSql)){  ?> 
+                        <a class="dropdown-item" href="#"><?php echo $womenBrandResult->brand ?></a>
+                    <?php } ?>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="dropdown-items">
+                      <h5>Men Brands</h5>
+                      <?php $womenBrandSql = $obj->query("select * from tbl_brand where status=1 and cat_id='4' order by id asc limit 0,10",-1);
+                       while($womenBrandResult = $obj->fetchNextObject($womenBrandSql)){  ?> 
+                        <a class="dropdown-item" href="#"><?php echo $womenBrandResult->brand ?></a>
+                    <?php } ?>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="dropdown-items">
+                      <h5>Kids Brands</h5>
+                      <?php $womenBrandSql = $obj->query("select * from tbl_brand where status=1 and cat_id='5' order by id asc limit 0,10",-1);
+                       while($womenBrandResult = $obj->fetchNextObject($womenBrandSql)){  ?> 
+                        <a class="dropdown-item" href="#"><?php echo $womenBrandResult->brand ?></a>
+                    <?php } ?>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                    <div class="dropdown-items">
+                      <h5>Home Brands</h5>
+                      <?php $womenBrandSql = $obj->query("select * from tbl_brand where status=1 and cat_id='6' order by id asc limit 0,10",-1);
+                       while($womenBrandResult = $obj->fetchNextObject($womenBrandSql)){  ?> 
+                        <a class="dropdown-item" href="#"><?php echo $womenBrandResult->brand ?></a>
+                    <?php } ?>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </li>
         </ul>
         <!-- <ul class="navbar-nav ml-auto">
           <li class="nav-item active">

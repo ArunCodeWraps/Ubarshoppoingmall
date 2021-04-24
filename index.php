@@ -83,16 +83,100 @@ include 'includes/header.php';
 							<img src="upload_images/brand/<?php echo $value[0]->logo ?>">
 							<div class="link_title"><?php echo $value[0]->brand ?></div>
 						</a>
+						<?php if(!empty($value[1]->brand)){ ?>
 						<a href="#" class="link_item">
 							<img src="upload_images/brand/<?php echo $value[1]->logo ?>">
 							<div class="link_title"><?php echo $value[1]->brand ?></div>
 						</a>
+					    <?php } ?>
 					</div>
 
 				<?php } ?>
 					
 				</div>
+
+
+				<div class="title mt-1">
+				<h4 class="navtitle">TRENDING NOW</h4>
+				<div class="table_wrapper owl-carousel owl-arrows">
+
+				<?php
+						$d=0;
+						$brandArr=array();
+						$brandSql = $obj->query("select * from $tbl_brand where status=1 and cat_id='$hCatResult->id' order by id desc",-1);
+						while($brandResult = $obj->fetchNextObject($brandSql)){
+							$brandArr[]=$brandResult;
+						}
+						
+						$column = 12;
+						$rows = array_chunk($brandArr, $column);
+						$num=1;
+						foreach ($rows as $value) { ?>
+
+								<div class="link_box">
+									<table class="table">
+										<tbody>
+											<tr>
+												<?php if(!empty($value[0]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+0; ?></span> <?php echo $value[0]->brand ?></td>
+												<?php } ?>
+												<?php if(!empty($value[1]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+1; ?></span> <?php echo $value[1]->brand ?></td>
+												<?php } ?>
+												<?php if(!empty($value[2]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+2; ?></span> <?php echo $value[2]->brand ?></td>
+												<?php } ?>
+											</tr>
+											<tr>
+												<?php if(!empty($value[3]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+3; ?></span> <?php echo $value[3]->brand ?></td>
+												<?php } ?>
+												<?php if(!empty($value[4]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+4; ?></span> <?php echo $value[4]->brand ?></td>
+												<?php } ?>
+												<?php if(!empty($value[5]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+5; ?></span> <?php echo $value[5]->brand ?></td>
+												<?php } ?>
+											</tr>
+											<tr>
+												<?php if(!empty($value[6]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+6; ?></span> <?php echo $value[6]->brand ?></td>
+												<?php } ?>
+												<?php if(!empty($value[7]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+7; ?></span> <?php echo $value[7]->brand ?></td>
+												<?php } ?>
+												<?php if(!empty($value[8]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+8; ?></span> <?php echo $value[8]->brand ?></td>
+												 <?php } ?>
+											</tr>
+											<tr>
+												<?php if(!empty($value[9]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+9; ?></span> <?php echo $value[9]->brand ?></td>
+												<?php } ?>
+												<?php if(!empty($value[10]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+10; ?></span> <?php echo $value[10]->brand ?></td>
+												<?php } ?>
+												<?php if(!empty($value[11]->brand)){ ?>
+												<td><span class="number-circle"><?php echo $num+11; ?></span> <?php echo $value[11]->brand ?></td>
+												 <?php } ?>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							<?php $num=$num+9; } ?>				
+			            </div>
+		             </div>
+
+
+
+
+
 			</div>
+
+
+
+
+
 
 			<?php $c++;} ?>
 			
@@ -104,51 +188,7 @@ include 'includes/header.php';
 		
 
 
-		<div class="title mt-1">
-			<h4 class="navtitle">TRENDING NOW</h4>
-			<div class="table_wrapper owl-carousel owl-arrows">
-
-				<?php
-						$d=0;
-						$brandArr=array();
-						$brandSql = $obj->query("select * from $tbl_brand where status=1 order by id desc",-1);
-						while($brandResult = $obj->fetchNextObject($brandSql)){
-							$brandArr[]=$brandResult;
-						}
-						
-						$column = 9;
-						$rows = array_chunk($brandArr, $column);
-						$num=1;
-						foreach ($rows as $value) { ?>
-
-								<div class="link_box">
-									<table class="table">
-										<tbody>
-											<tr>
-												<td><span class="number-circle"><?php echo $num+0; ?></span> <?php echo $value[0]->brand ?></td>
-												<td><span class="number-circle"><?php echo $num+1; ?></span> <?php echo $value[1]->brand ?></td>
-												<td><span class="number-circle"><?php echo $num+2; ?></span> <?php echo $value[2]->brand ?></td>
-											</tr>
-											<tr>
-												<td><span class="number-circle"><?php echo $num+3; ?></span> <?php echo $value[3]->brand ?></td>
-												<td><span class="number-circle"><?php echo $num+4; ?></span> <?php echo $value[4]->brand ?></td>
-												<td><span class="number-circle"><?php echo $num+5; ?></span> <?php echo $value[5]->brand ?></td>
-											</tr>
-											<tr>
-												<td><span class="number-circle"><?php echo $num+6; ?></span> <?php echo $value[6]->brand ?></td>
-												<td><span class="number-circle"><?php echo $num+7; ?></span> <?php echo $value[7]->brand ?></td>
-												<td><span class="number-circle"><?php echo $num+8; ?></span> <?php echo $value[8]->brand ?></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-
-
-							<?php $num=$num+9; } ?>	
-
-				
-			</div>
-		</div>
+		
 	</div>
 </section>
 

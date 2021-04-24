@@ -35,18 +35,29 @@ include 'includes/header.php';
 							<div class="card-body">
 								<!-- Second listing -->
 									<ul>
-										<?php
-											for ($i=0; $i < 6 ; $i++) { ?> 
-											<li>
-											<div id="submenu_ul" class="submenu_ul">
-												<div  id="heading1" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Item <?php echo $i; ?></div>
+										
 
-												<div id="collapse1" class="collapse submenu_li" aria-labelledby="heading1" data-parent="#submenu_ul">
-													item <?php echo $i; ?> content
+
+										
+
+
+										<li>
+											<div id="submenu_ul1" class="submenu_ul">
+												<div  id="heading1" data-toggle="collapse" data-target="#collapse11" aria-expanded="true" aria-controls="collapse1">Item 1</div>
+
+												<div id="collapse11" class="collapse submenu_li" data-toggle="collapse" data-target="#collapse111" aria-labelledby="heading1" >
+													item 1 sub menu
 												</div>
+
+												<div id="collapse111" class="collapse submenu_li" aria-labelledby="heading11" data-parent="#submenu_ul11">
+													item 2 sub sub menu
+												</div>
+
+
 											</div>
 										</li>
-										<?php } ?>
+
+
 									</ul>
 								<!-- End Second listing -->
 							</div>
