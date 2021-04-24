@@ -421,11 +421,6 @@ if($_REQUEST['id']!=''){
         $("#subcat_id").append(data);
         }
       })
-     })
-
-
-    $('#subsubcat_id').change(function() {
-      var cat_id=$(this).val(); 
       $.ajax({
         url:"getBrand.php",
         data:{cat_id:cat_id},
@@ -436,7 +431,10 @@ if($_REQUEST['id']!=''){
         $("#brand_id").append(data);
         }
       })
+
      })
+
+
 
 
         $('#subcat_id').change(function() {

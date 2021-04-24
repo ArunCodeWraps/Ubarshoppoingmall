@@ -5,7 +5,7 @@ include("../include/functions.php");
  
  $cat_id=$_REQUEST['cat_id'];
  //$maincat_id=getMainParent($cat_id);
- $areaArr=$obj->query("select * from $tbl_brand where subsubcat_id='".$cat_id."' and status=1 ",$debug=-1);
+ $areaArr=$obj->query("select * from $tbl_brand where cat_id='".$cat_id."' and status=1 ",$debug=-1);
  if($obj->numRows($areaArr)){ 
  while($resultArea=$obj->fetchNextObject($areaArr)){?>
  <option value="<?php echo $resultArea->id ;?>" ><?php echo $resultArea->brand;?></option>

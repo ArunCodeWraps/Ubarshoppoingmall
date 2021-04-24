@@ -8,8 +8,6 @@ validate_admin();
 
 if($_REQUEST['submitForm']=='yes'){
   $cat_id=$obj->escapestring($_POST['cat_id']);
-  $subcat_id=$obj->escapestring($_POST['subcat_id']);
-  $subsubcat_id=$obj->escapestring($_POST['subsubcat_id']);
   $brand=$obj->escapestring($_POST['brand']);
 
   $Image= new SimpleImage();
@@ -22,11 +20,11 @@ if($_REQUEST['submitForm']=='yes'){
     $Image->save("../upload_images/brand/thumb/".$img);  
   }
   if($_REQUEST['id']==''){
-    $obj->query("insert into $tbl_brand set brand='".ucfirst($brand)."',cat_id='$cat_id',subcat_id='$subcat_id',subsubcat_id='$subsubcat_id',logo='$img',status=1 ");
+    $obj->query("insert into $tbl_brand set brand='".ucfirst($brand)."',cat_id='$cat_id',logo='$img',status=1 ");
     $_SESSION['sess_msg']='Brand added sucessfully';  
 
   }else{ 
-    $sql="update $tbl_brand set brand='".ucfirst($brand)."',cat_id='$cat_id',subcat_id='$subcat_id',subsubcat_id='$subsubcat_id' ";
+    $sql="update $tbl_brand set brand='".ucfirst($brand)."',cat_id='$cat_id' ";
     if($img){
       $imageArr=$obj->query("select logo from $tbl_brand where id='".$_REQUEST['id']."' "); 
       $resultImage=$obj->fetchNextObject($imageArr);
@@ -74,7 +72,7 @@ if($_REQUEST['id']!=''){
             <input type="hidden" name="id" value="<?php echo $_REQUEST['id'];?>" />
             <div class="box-body">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label>Category:</label>
                     <select name="cat_id" id="cat_id" class="form-control">
@@ -89,49 +87,16 @@ if($_REQUEST['id']!=''){
 
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Sub Category:</label>
-                    <select name="subcat_id" id="subcat_id" class="form-control">
-                      <option value="">Select Sub Category</option>
-                      <?php
-                      if($_REQUEST['id']!=''){
-                      $subcatSql = $obj->query("select * from $tbl_subcategory where status=1 and cat_id='".$result->cat_id."'");
-                      while($catResult = $obj->fetchNextObject($subcatSql)){?>
-                        <option value="<?php echo $catResult->id; ?>" <?php if($result->subcat_id==$catResult->id){?> selected <?php } ?>><?php echo $catResult->subcategory; ?></option>
-                      <?php }
-                      }
-                      ?>
-                    </select>
-
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Sub Sub Category:</label>
-                    <select name="subsubcat_id" id="subsubcat_id" class="form-control">
-                      <option value="">Select Sub Sub Category</option>
-                      <?php
-                      if($_REQUEST['id']!=''){
-                      $subcatSql = $obj->query("select * from $tbl_subsubcategory where status=1 and subcat_id='".$result->subcat_id."'");
-                      while($subcatResult = $obj->fetchNextObject($subcatSql)){?>
-                        <option value="<?php echo $subcatResult->id; ?>" <?php if($result->subsubcat_id==$subcatResult->id){?> selected <?php } ?>><?php echo $subcatResult->subsubcategory; ?></option>
-                      <?php }
-                      }
-                      ?>
-                    </select>
-
-                  </div>
-                </div>
-
+               </div>
+               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Brand :</label>
                     <input name="brand" type="text" id="brand" class="form-control" value="<?php echo stripslashes($result->brand);?>" />
                   </div>
                 </div>
-               
+               </div>
+               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Logo:</label>

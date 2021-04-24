@@ -406,11 +406,7 @@ include 'includes/footer.php';
         $("#subcat_id").append(data);
         }
       })
-     })
 
-
-    $('#subsubcat_id').change(function() {
-      var cat_id=$(this).val(); 
       $.ajax({
         url:"ajax/getBrand.php",
         data:{cat_id:cat_id},
@@ -421,7 +417,9 @@ include 'includes/footer.php';
         $("#brand_id").append(data);
         }
       })
+
      })
+
 
 
        $('#subcat_id').change(function() {

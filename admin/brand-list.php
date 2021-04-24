@@ -64,7 +64,7 @@ validate_admin();
                           <label for="squaredFour<?php echo $line->id;?>"></label>
                         </div></td>
 
-                        <td><?php echo getField('category',$tbl_category,$line->cat_id)."->".getField('subcategory',$tbl_subcategory,$line->subcat_id)."->".getField('subsubcategory',$tbl_subsubcategory,$line->subsubcat_id);; ?></td>
+                        <td><?php echo getField('category',$tbl_category,$line->cat_id); ?></td>
                         <td><?php echo stripslashes($line->brand); ?></td>
                         <td><?php if(is_file("../upload_images/brand/thumb/".$line->logo)){ ?>
                           <img src="../upload_images/brand/thumb/<?php echo $line->logo; ?>" class="img-thumbnail-prod" />
