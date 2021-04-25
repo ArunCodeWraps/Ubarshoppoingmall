@@ -9,6 +9,7 @@ validate_admin();
 if($_REQUEST['submitForm']=='yes'){
   $cat_id=$obj->escapestring($_POST['cat_id']);
   $brand=$obj->escapestring($_POST['brand']);
+  $slug = generateSlug($brand);
 
   $Image= new SimpleImage();
   if($_FILES['photo']['size']>0 && $_FILES['photo']['error']==''){
@@ -20,11 +21,11 @@ if($_REQUEST['submitForm']=='yes'){
     $Image->save("../upload_images/brand/thumb/".$img);  
   }
   if($_REQUEST['id']==''){
-    $obj->query("insert into $tbl_brand set brand='".ucfirst($brand)."',cat_id='$cat_id',logo='$img',status=1 ");
+    $obj->query("insert into $tbl_brand set brand='".ucfirst($brand)."',slug='$slug',cat_id='$cat_id',logo='$img',status=1 ");
     $_SESSION['sess_msg']='Brand added sucessfully';  
 
   }else{ 
-    $sql="update $tbl_brand set brand='".ucfirst($brand)."',cat_id='$cat_id' ";
+    $sql="update $tbl_brand set brand='".ucfirst($brand)."',slug='$slug',cat_id='$cat_id' ";
     if($img){
       $imageArr=$obj->query("select logo from $tbl_brand where id='".$_REQUEST['id']."' "); 
       $resultImage=$obj->fetchNextObject($imageArr);

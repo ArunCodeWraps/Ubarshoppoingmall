@@ -3,6 +3,9 @@ RewriteEngine on
 RewriteRule ^index index.php
 RewriteRule ^news/(.*)$ news-details.php?slug=$1
 RewriteRule ^product-list/(.*)$ product-list1.php
+RewriteRule ^category/(.*)$ category.php?catslug=$1
+RewriteRule ^brand/(.*)$ category.php?brandslug=$1
+
 
 RewriteRule ^details/(.*)$ products-details.php?slug=$1
 

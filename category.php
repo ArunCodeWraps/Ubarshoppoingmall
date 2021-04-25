@@ -1,6 +1,18 @@
 <?php 
 include 'includes/head.php';
 include 'includes/header.php';
+
+
+if (!empty($_REQUEST['brandslug'])) {
+	//echo 'brand';
+}
+
+if (!empty($_REQUEST['catslug'])) {
+	//echo 'cate';
+}
+
+
+
 ?>
 
 <style type="text/css">
@@ -35,18 +47,56 @@ include 'includes/header.php';
 							<div class="card-body">
 								<!-- Second listing -->
 									<ul>
-										<?php
-											for ($i=0; $i < 6 ; $i++) { ?> 
-											<li>
-											<div id="submenu_ul" class="submenu_ul">
-												<div  id="heading1" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Item <?php echo $i; ?></div>
+										
 
-												<div id="collapse1" class="collapse submenu_li" aria-labelledby="heading1" data-parent="#submenu_ul">
-													item <?php echo $i; ?> content
+
+										
+										<?php $catSql = $obj->query("select * from tbl_category where status=1  order by id asc",-1);
+											$i=1;
+            								while($catResult = $obj->fetchNextObject($catSql)){  ?> 
+
+										<li>
+											<div id="submenu_ul" class="submenu_ul">
+												<div  id="heading1" data-toggle="collapse" data-target="#collapse<?php echo $i ?>" aria-expanded="false" aria-controls="collapse1"><?php echo $catResult->category ?></div>
+
+												<div id="collapse<?php echo $i ?>" class="collapse submenu_li" aria-labelledby="heading1" data-parent="#submenu_ul">
+
+													<?php $subcatSql = $obj->query("select * from tbl_subcategory where status=1 and cat_id='$catResult->id' order by id asc",-1);
+
+                    								while($subCatResult = $obj->fetchNextObject($subcatSql)){  ?> 
+													<div id="submenu_ul2" class="submenu_ul">
+														<div  id="heading2" data-toggle="collapse" data-target="#collapse<?php echo $subCatResult->slug ?>" aria-expanded="false" aria-controls="collapse2"><?php echo $subCatResult->subcategory ?></div>
+
+														<?php $subsubcatSql = $obj->query("select * from tbl_subsubcategory where status=1 and subcat_id='$subCatResult->id' order by id asc",-1);
+                   										 while($subSubCatResult = $obj->fetchNextObject($subsubcatSql)){  ?> 
+														<div id="collapse<?php echo $subCatResult->slug ?>" class="collapse submenu_li" aria-labelledby="heading2" data-parent="#submenu_ul2">
+															<?php echo $subSubCatResult->subsubcategory ?>
+														</div>
+														<?php } ?>
+														
+													</div>
+
+													 <?php } ?>
+
+													<!-- <div id="submenu_ul2" class="submenu_ul">
+														<div  id="heading2" data-toggle="collapse" data-target="#collapse22" aria-expanded="true" aria-controls="collapse2">Item 2</div>
+
+														<div id="collapse22" class="collapse submenu_li" aria-labelledby="heading2" data-parent="#submenu_ul2">
+															item 3
+														</div>
+														<div id="collapse22" class="collapse submenu_li" aria-labelledby="heading2" data-parent="#submenu_ul2">
+															item 33
+														</div>
+													</div> -->
+
+
 												</div>
+
+
 											</div>
 										</li>
-										<?php } ?>
+										<?php $i++; } ?>
+
 									</ul>
 								<!-- End Second listing -->
 							</div>
@@ -167,75 +217,7 @@ include 'includes/header.php';
 						</select>
 					</div>
 					<div class="container-fluid px-0">
-						<div class="row">
-							<?php 
-								for ($i=0; $i < 3 ; $i++) { ?>
-
-								<div class="col-md-4">
-								<div class="product-wrapper">
-								    <div class="product-card">
-								        <div class="product-front">
-								        	<div class="shadow"></div>
-								            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt.png" alt="" />
-								            <div class="image_overlay"></div>
-								            <div class="view_details">View details</div>
-								            <div class="stats">        	
-								                <div class="stats-container">
-								                    <span class="product_price">$39</span>
-								                    <span class="product_name">Adidas Originals</span>
-								                    <p>Men's running shirt</p>
-								                    <div class="product-options">
-								                    	<div class="add_cart">
-									                	<button class="btn btn-danger">
-									                		<i class="fas fa-heart"></i>
-									                	</button>
-									                	<button class="btn btn-primary">
-									                		<i class="fas fa-shopping-cart"></i>
-									                	</button>
-									                	</div> 
-								                    <strong>SIZES</strong>
-								                    <span>XS, S, M, L, XL, XXL</span>
-								                    <strong>COLORS</strong>
-								                    <div class="colors">
-								                        <div class="c-blue"><span></span></div>
-								                        <div class="c-red"><span></span></div>
-								                        <div class="c-white"><span></span></div>
-								                        <div class="c-green"><span></span></div>
-								                    </div>
-								                </div>                      
-								                </div>                         
-								            </div>
-								        </div>
-								        <div class="product-back">
-									        <div class="shadow"></div>
-								            <div class="carousel">
-								                <ul>
-								                    <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
-								                    <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
-								                    <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
-								                </ul>
-								                <div class="arrows-perspective">
-								                    <div class="carouselPrev">
-								                        <div class="y"></div>
-									                    <div class="x"></div>
-								                    </div>
-								                    <div class="carouselNext">
-								                        <div class="y"></div>
-									                    <div class="x"></div>
-								                    </div>
-								                </div>
-								            </div>
-								            <div class="flip-back">
-								            	<div class="cy"></div>
-								                <div class="cx"></div>
-								            </div>
-								        </div>	  
-								    </div>	
-								</div>	
-							</div> 
-									
-							<?php	}
-							 ?>
+						<div class="row" id="product-list-result">
 						</div>
 					</div>
 				</div>
@@ -247,4 +229,46 @@ include 'includes/header.php';
 <?php 
 include 'includes/footer.php';
 ?>
+
+<script type="text/javascript">
+ function getProductData(id,name) {
+    $("#mycat_id").val(id);
+    $(".page-title").html(name);
+    $.ajax({
+        type: "POST",
+        url: "ajax/get-product-data.php",
+        data:'cid='+id,
+        success: function(data){
+            //console.log(data);
+            $('#product-list-result').html(data); 
+        },
+        complete: function(){
+            /*$('#product-load').fadeOut(10000);*/
+        }
+    });
+}
+
+
+
+$(document).ready(function(){
+   //var id='<?php echo $line1->id; ?>';
+   var id = $("#mycat_id").val();
+   var subid = $("#mysubcat_id").val();
+   
+   $.ajax({
+        type: "POST",
+        url: "ajax/get-product-data.php",
+        data:{'cid':id,'subcid':subid},
+        success: function(data){
+            /*console.log(data);*/
+            $('#product-list-result').html(data); 
+        },
+        complete: function(){
+            $('#product-load').fadeOut(1000);
+        }
+    });
+
+
+ });	
+</script>
 
