@@ -1,7 +1,7 @@
 <?php 
 include 'includes/head.php';
 include 'includes/header.php';
-$product_id=$_GET['id'];
+$product_id=3;
 $pSql = $obj->query("select * from $tbl_product where id='".$product_id."' ",$debug=-1);
 $pResult = $obj->fetchNextObject($pSql);
 $ppSql = $obj->query("select * from $tbl_productprice where product_id='".$product_id."' and status=1 order by display_order asc ",$debug=-1);
@@ -25,49 +25,14 @@ $ppResult = $obj->fetchNextObject($ppSql);
 			<div class="col-md-6">
 				<div class="owl-carousel product-detail-slider">
 					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d1c693bd2d4f540dca.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d2c693bd2d4f540dd0.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d1c693bd2d4f540dca.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d2c693bd2d4f540dd0.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d1c693bd2d4f540dca.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d2c693bd2d4f540dd0.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d1c693bd2d4f540dca.jpg" />
-					</div>
+						<img id="pic-1<?php echo $pResult->id; ?>" src="upload_images/product/big/<?php echo $ppResult->pphoto ?>" />
+					</div>					
 				</div>
 				<div class="owl-carousel product-thumb-slider">
 					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d1c693bd2d4f540dca.jpg" />
+						<img id="pic-2<?php echo $pResult->id; ?>" src="upload_images/product/thumb/<?php echo $ppResult->pphoto ?>" />
 					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d2c693bd2d4f540dd0.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d1c693bd2d4f540dca.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d2c693bd2d4f540dd0.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d1c693bd2d4f540dca.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d2c693bd2d4f540dd0.jpg" />
-					</div>
-					<div class="item">
-						<img src="https://di2ponv0v5otw.cloudfront.net/posts/2021/03/02/603e61d1c693bd2d4f540dc9/m_603e61d1c693bd2d4f540dca.jpg" />
-					</div>
+					
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -76,43 +41,38 @@ $ppResult = $obj->fetchNextObject($ppSql);
 						<div class="product-name"><?php echo $pResult->product_name; ?></div>
 						<div class="reviews-counter">
 							<div class="rate">
-								<input type="radio" id="star5" name="rate" value="5" checked />
+								<input type="radio" id="ratting" name="ratting" value="5" checked />
 								<label for="star5" title="text">5 stars</label>
-								<input type="radio" id="star4" name="rate" value="4" checked />
+								<input type="radio" id="ratting" name="ratting" value="4" checked />
 								<label for="star4" title="text">4 stars</label>
-								<input type="radio" id="star3" name="rate" value="3" checked />
+								<input type="radio" id="ratting" name="ratting" value="3" checked />
 								<label for="star3" title="text">3 stars</label>
-								<input type="radio" id="star2" name="rate" value="2" />
+								<input type="radio" id="ratting" name="ratting" value="2" />
 								<label for="star2" title="text">2 stars</label>
-								<input type="radio" id="star1" name="rate" value="1" />
+								<input type="radio" id="ratting" name="ratting" value="1" />
 								<label for="star1" title="text">1 star</label>
 							</div>
 							<span>3 Reviews</span>
 						</div>
 						<div class="product-price-discount">
-							<span>$29.00</span>
-							<del><span class="line-through">$39.00</del>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod ipsum dolor sit amet</p>
+							$<span id="sellprice"><?php echo $ppResult->sell_price; ?></span>
+							$<del id="mrpprice"><span class="line-through"><?php echo $ppResult->mrp_price; ?></del>
+							<p><?php echo $pResult->short_description; ?></p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4">
 							<div class="d-flex align-items-center justify-content-between">
-								<div class="w-50 mr-2">
-									<label class="d-block">Colours</label>
-									<select class="dropSelect w-100">
-										<option>Red</option>
-										<option>Green</option>
-										<option>Blue</option>
-									</select>
-								</div>
+			
 								<div class="w-50">
 									<label class="d-block">Size</label>
-									<select class="dropSelect w-100">
-										<option>S</option>
-										<option>M</option>
-										<option>L</option>
-										<option>XL</option>
+									<select class="dropSelect w-100" onchange="changeItemPrice(<?php echo $pResult->id; ?>,this.value)">
+										<?php 
+										$pSql = $obj->query("SELECT pr.id,pr.product_id,pr.size,u.name FROM tbl_productprice pr join tbl_unit as u on pr.unit_id=u.id WHERE pr.product_id='".$product_id."' and pr.status=1 order by pr.display_order asc ",$debug=-1);
+		
+										while($item=$obj->fetchNextObject($pSql)){ ?>
+										<option value="<?php echo $item->id; ?>"><?php echo $item->size." ".$item->name; ?></option>
+										<?php } ?>
 									</select>
 								</div>
 							</div>
@@ -142,14 +102,7 @@ $ppResult = $obj->fetchNextObject($ppSql);
 					</div>
 				</div>
 				<div class="shipping_detail">
-					<ul class="p-0">
-						<li><h4>SHIPPING / DISCOUNT</h4></li>
-						<li><i class="fas fa-shopping-bag"></i>Seller Discount: 15% off 3+ Bundle
-						</li>
-						<li><i class="fas fa-truck"></i>$7.45 Expedited (1-3 day) Shipping on all orders
-						</li>
-						<li><i class="fas fa-lock"></i>Buyer Protection & Refund Policy</li>
-					</ul>
+					<?php echo $pResult->description; ?>
 				</div>
 			</div>
 		</div>
@@ -163,26 +116,25 @@ $ppResult = $obj->fetchNextObject($ppSql);
 				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+				<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab"><?php echo $pResult->description; ?>
 				</div>
 				<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
 					<div class="review-heading">REVIEWS</div>
 					<p class="mb-20">There are no reviews yet.</p>
-					<form class="review-form">
+					<form name="reviewFrm" class="review-form">
 						<div class="form-group">
 							<label>Your rating</label>
 							<div class="reviews-counter">
 								<div class="rate">
-									<input type="radio" id="star5" name="rate" value="5" />
+									<input type="radio" id="star5" name="ratting" value="5" />
 									<label for="star5" title="text">5 stars</label>
-									<input type="radio" id="star4" name="rate" value="4" />
+									<input type="radio" id="star4" name="ratting" value="4" />
 									<label for="star4" title="text">4 stars</label>
-									<input type="radio" id="star3" name="rate" value="3" />
+									<input type="radio" id="star3" name="ratting" value="3" />
 									<label for="star3" title="text">3 stars</label>
-									<input type="radio" id="star2" name="rate" value="2" />
+									<input type="radio" id="star2" name="ratting" value="2" />
 									<label for="star2" title="text">2 stars</label>
-									<input type="radio" id="star1" name="rate" value="1" />
+									<input type="radio" id="star1" name="ratting" value="1" />
 									<label for="star1" title="text">1 star</label>
 								</div>
 							</div>
@@ -231,15 +183,22 @@ $ppResult = $obj->fetchNextObject($ppSql);
 	</div>
 	<div class="container-fluid">
 		<div class="more_articles owl-carousel owl-arrows">
+			<?php 
+			$mSql = $obj->query("select * from $tbl_product where status='1'  order by RAND() limit 0,3",$debug=-1); 
+			while($mResult=$obj->fetchNextObject($mSql)){ 
+			$mpSql = $obj->query("select * from $tbl_productprice where product_id='".$mResult->id."' and status=1 order by display_order asc ",$debug=-1);
+			$mpResult = $obj->fetchNextObject($mpSql);
+			?>
 			<div class="link_box">
 				<a href="#" class="link_item">
-					<img src="img/slide-img2.jpg">
+					<img src="upload_images/product/big/<?php echo $mpResult->pphoto ?>">
 					<div class="link_title">
-						<p class="text-elipse">Levi's 511 Men's Blue Slim Fit Jeans Size 30x32</p>
-						$29.00 <del class="ml-2">$29</del>
+						<p class="text-elipse"><?php echo $mResult->product_name;  ?></p>
+						$<?php echo $mpResult->sell_price;  ?> <del class="ml-2">$<?php echo $mpResult->mrp_price;  ?></del>
 					</div>
 				</a>
 			</div>
+		<?php }?>
 		</div>
 	</div>
 </section>
@@ -247,4 +206,26 @@ $ppResult = $obj->fetchNextObject($ppSql);
 <?php 
 include 'includes/footer.php';
 ?>
+
+
+<script type="text/javascript">
+	
+function changeItemPrice(id, pid) {
+	var pid = pid;
+	$.ajax({
+		type: "POST",
+		url: "ajax/item-product-data.php",
+		data: 'itemId=' + pid,
+		dataType: 'json',
+		success: function(data) {
+			console.log(data);
+			$("#sellprice").html(data.sell_price);
+			$("#mrpprice").html(data.mrp_price);
+			$(".quantity").val(1);
+			document.getElementById("pic-1"+id).src = "upload_images/product/big/" + data.pphoto;
+			document.getElementById("pic-2"+id).src = "upload_images/product/thumb/" + data.pphoto;
+		}
+	});
+}
+</script>
 

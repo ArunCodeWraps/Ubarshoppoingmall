@@ -219,7 +219,7 @@ if($_REQUEST['id']!=''){
                     <select name="brand_id" id="brand_id" class="required form-control select2">
                         <?php
                       if($_REQUEST['id']!=''){
-                        $bsql=$obj->query("select * from $tbl_brand where 1=1 and status=1 and subcat_id='".$result->subcat_id."'",$debug=-1); 
+                        $bsql=$obj->query("select * from $tbl_brand where 1=1 and status=1 and cat_id='".$result->cat_id."'",$debug=-1); 
                         while($bline=$obj->fetchNextObject($bsql)){
                           ?>
                           <option value="<?php echo $bline->id; ?>" <?php echo ($bline->id==$result->brand_id)?'selected':'' ?> ><?php echo $bline->brand; ?></option>
@@ -310,7 +310,7 @@ if($_REQUEST['id']!=''){
               <div class="col-md-3" id="warehousemyid">
                 <div class="form-group">
                   <label>Vendor</label>
-                  <select name="vendor_id" id="vendor_id" class="form-control select2" >
+                  <select name="vendor_id" id="vendor_id" class="form-control select2 required" >
                     <option value="">Select Vendor</option>
                     <?php
                     $storeArr=$obj->query("select * from $tbl_user where user_type=2 and status=1  ",$debug=-1); 
