@@ -74,10 +74,11 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/owl.carousel.min.js"></script>
-  <script src="js/autoplay.js"></script>
+  <!-- <script src="js/autoplay.js"></script> -->
   <script src="js/jquery.nice-select.min.js"></script>
-  <script src="js/myjs.js"></script>
-  
+  <!-- <script src="js/myjs.js"></script> -->
+  <script type="text/javascript" src="js/cart.js"></script>
+  <script type="text/javascript" src="js/toastr.min.js"></script>
 
 
 <script type="text/javascript">

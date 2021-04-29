@@ -3,46 +3,78 @@
 include('../include/config.php');
 include("../include/functions.php");
 
-$where='';
+  $where='';
 
 
 
   $i=1;
   $whr="";
 
-	$cid=$_POST["cid"];
-  $_SESSION['catid']=$cid;
 
-  if (!empty($_POST["cid"])) {
-      $cid=$_POST["cid"];
-      $whr.="and cat_id='$cid'";
+  if (!empty($_POST["cat_id"])) {
+      $cid=$_POST["cat_id"];
+      $whr.="and a.cat_id='$cid'";
   }
   
-  if (!empty($_POST["subcid"])) {
-      $subcid=$_POST["subcid"];
-      $whr.="and subcat_id='$subcid'";
+  if (!empty($_POST["subcat_id"])) {
+      $subcid=$_POST["subcat_id"];
+      $whr.="and a.subcat_id='$subcid'";
   }
 
-  if (!empty($_POST["shortValue"])) {
-      if($_POST['shortValue']=='Alphabetic')
+  if (!empty($_POST["subsubcat_id"])) {
+      $subsubcid=$_POST["subsubcat_id"];
+      $whr.="and a.subsubcat_id='$subsubcid'";
+  }
+
+
+  if (!empty($_POST["brand_id"])) {
+      $brand_id=$_POST["brand_id"];
+      $whr.="and a.brand_id='$brand_id'";
+  }
+
+
+  if (!empty($_POST["color_id"])) {
+      $color_id=$_POST["color_id"];
+      $whr.="and b.color_id='$color_id'";
+  }
+
+
+  if (!empty($_POST["price_range"])) {
+      $price=explode('-',$_POST["price_range"]);
+      $price_min=$price[0];
+      $price_max=$price[1];
+      $whr.="and b.sell_price BETWEEN '$price_min' AND '$price_max'";
+  }
+
+
+  if (!empty($_POST["min_price"]) && !empty($_POST["max_price"])) {
+      $price_min=$_POST["min_price"];
+      $price_max=$_POST["max_price"];
+      $whr.="and b.sell_price BETWEEN '$price_min' AND '$price_max'";
+  }
+
+
+  if (!empty($_POST["orderby"])) {
+      if($_POST['orderby']=='Alphabetic')
       {
-        $where= 'ORDER BY a.name ASC';
+        $where= 'ORDER BY a.product_name ASC';
       }
-      else if($_POST['shortValue']=='date')
+      else if($_POST['orderby']=='date')
       {
         $where= 'ORDER BY a.id DESC';
       }
-      else if($_POST['shortValue']=='price')
+      else if($_POST['orderby']=='price')
       {
-        $where= 'ORDER BY a.price ASC';
+        $where= 'ORDER BY b.sell_price ASC';
       }
-      else if($_POST['shortValue']=='price-desc')
+      else if($_POST['orderby']=='price-desc')
       {
-        $where= 'ORDER BY a.price DESC';
+        $where= 'ORDER BY b.sell_price DESC';
       }
+      
   }
 
-	$mSql = $obj->query("select a.* from $tbl_product as a  where 1=1 and a.status='1' $whr $where  limit 0,12",$debug=-1);
+	$mSql = $obj->query("select a.* from $tbl_product as a  join tbl_productprice as b on a.id=b.product_id where 1=1 and a.status='1' $whr $where  limit 0,12",$debug=-1);
 	$numRows=$obj->numRows($mSql);
 	if ($numRows>=1) {
 		
@@ -66,25 +98,27 @@ $where='';
                                 <div class="stats-container">
                                     <span class="product_price">$<?php echo $getpic->sell_price ?></span>
                                     <span class="product_name"><?php echo $pline->product_name ?></span>
-                                    <p>Brand name</p>
+                                    <p><?php echo $brand=getField('brand','tbl_brand',$pline->brand_id) ?></p>
                                     <div class="product-options">
                                       <div class="add_cart">
                                     <button class="btn btn-danger">
                                       <i class="fas fa-heart"></i>
                                     </button>
-                                    <button class="btn btn-primary">
+                                    <?php $unit=getField('name','tbl_unit',$getpic->unit_id) ?>
+                                    <?php  $size= $getpic->size." ".$unit ?>
+                                    <button class="btn btn-primary add-to-cart" data-product_id="<?php echo $pline->id ?>" data-product_name="<?php echo $pline->product_name ?>" data-product_price="<?php echo $getpic->sell_price ?>" data-image="<?php echo $getpic->pphoto ?>" data-size="<?php echo $size ?>" data-product_price_id="<?php echo $getpic->id ?>">
                                       <i class="fas fa-shopping-cart"></i>
                                     </button>
                                     </div> 
                                     <strong>SIZES</strong>
-                                    <span>XS, S, M, L, XL, XXL</span>
-                                    <strong>COLORS</strong>
+                                    <span><?php  echo $size ?></span>
+                                    <!-- <strong>COLORS</strong>
                                     <div class="colors">
                                         <div class="c-blue"><span></span></div>
                                         <div class="c-red"><span></span></div>
                                         <div class="c-white"><span></span></div>
                                         <div class="c-green"><span></span></div>
-                                    </div>
+                                    </div> -->
                                 </div>                      
                                 </div>                         
                             </div>
@@ -102,7 +136,7 @@ $where='';
  <?php } else{ ?>
 
 
-<p style="text-align:center">	<img src="<?php echo SITE_URL; ?>images/no_product.jpg" width="250px"/></p>
+<p style="text-align:center;width:100%">	<img src="<?php echo SITE_URL; ?>images/no_product.jpg" width="250px"/></p>
 
 	<?php } ?>
 

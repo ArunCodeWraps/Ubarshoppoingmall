@@ -43,8 +43,9 @@
               </div>
             </div>
             <div class="col-xs-2 col-sm-2 text-center cart">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-              <div class="number" id="c_itmes">0</div>
+              <a href="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <div class="number" ><span id="c_itmesss">res</span></div>
+              </a>
             </div>
           </div>
         </div>
@@ -109,7 +110,7 @@
                       <h5>Women Brands</h5>
                       <?php $womenBrandSql = $obj->query("select * from tbl_brand where status=1 and cat_id='3' order by id asc limit 0,10",-1);
                        while($womenBrandResult = $obj->fetchNextObject($womenBrandSql)){  ?> 
-                        <a class="dropdown-item" href="#"><?php echo $womenBrandResult->brand ?></a>
+                        <a class="dropdown-item" href="brand/<?php echo $womenBrandResult->slug ?>"><?php echo $womenBrandResult->brand ?></a>
                     <?php } ?>
                     </div>
                   </div>
@@ -119,7 +120,7 @@
                       <h5>Men Brands</h5>
                       <?php $womenBrandSql = $obj->query("select * from tbl_brand where status=1 and cat_id='4' order by id asc limit 0,10",-1);
                        while($womenBrandResult = $obj->fetchNextObject($womenBrandSql)){  ?> 
-                        <a class="dropdown-item" href="#"><?php echo $womenBrandResult->brand ?></a>
+                        <a class="dropdown-item" href="brand/<?php echo $womenBrandResult->slug ?>"><?php echo $womenBrandResult->brand ?></a>
                     <?php } ?>
                     </div>
                   </div>
@@ -129,7 +130,7 @@
                       <h5>Kids Brands</h5>
                       <?php $womenBrandSql = $obj->query("select * from tbl_brand where status=1 and cat_id='5' order by id asc limit 0,10",-1);
                        while($womenBrandResult = $obj->fetchNextObject($womenBrandSql)){  ?> 
-                        <a class="dropdown-item" href="#"><?php echo $womenBrandResult->brand ?></a>
+                        <a class="dropdown-item" href="brand/<?php echo $womenBrandResult->slug ?>"><?php echo $womenBrandResult->brand ?></a>
                     <?php } ?>
                     </div>
                   </div>
@@ -140,7 +141,7 @@
                       <h5>Home Brands</h5>
                       <?php $womenBrandSql = $obj->query("select * from tbl_brand where status=1 and cat_id='6' order by id asc limit 0,10",-1);
                        while($womenBrandResult = $obj->fetchNextObject($womenBrandSql)){  ?> 
-                        <a class="dropdown-item" href="#"><?php echo $womenBrandResult->brand ?></a>
+                        <a class="dropdown-item" href="brand/<?php echo $womenBrandResult->slug ?>"><?php echo $womenBrandResult->brand ?></a>
                     <?php } ?>
                     </div>
                   </div>

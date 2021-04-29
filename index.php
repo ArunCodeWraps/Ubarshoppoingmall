@@ -118,46 +118,61 @@ include 'includes/header.php';
 										<tbody>
 											<tr>
 												<?php if(!empty($value[0]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+0; ?></span> <?php echo $value[0]->brand ?></td>
+												<td>
+													<a href="brand/<?php echo $value[0]->slug ?>"><span class="number-circle"><?php echo $num+0; ?></span> <?php echo $value[0]->brand ?></a>
+												</td>
 												<?php } ?>
 												<?php if(!empty($value[1]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+1; ?></span> <?php echo $value[1]->brand ?></td>
+												<td>
+													<a href="brand/<?php echo $value[1]->slug ?>"><span class="number-circle"><?php echo $num+1; ?></span> <?php echo $value[1]->brand ?></a>
+												</td>
 												<?php } ?>
 												<?php if(!empty($value[2]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+2; ?></span> <?php echo $value[2]->brand ?></td>
+												<td>
+													<a href="brand/<?php echo $value[2]->slug ?>"><span class="number-circle"><?php echo $num+2; ?></span> <?php echo $value[2]->brand ?></a>
+												</td>
 												<?php } ?>
 											</tr>
 											<tr>
 												<?php if(!empty($value[3]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+3; ?></span> <?php echo $value[3]->brand ?></td>
+												<td>
+													<a href="brand/<?php echo $value[3]->slug ?>"><span class="number-circle"><?php echo $num+3; ?></span> <?php echo $value[3]->brand ?>
+												    </a>
+												</td>
 												<?php } ?>
 												<?php if(!empty($value[4]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+4; ?></span> <?php echo $value[4]->brand ?></td>
+												<td>
+													<a href="brand/<?php echo $value[4]->slug ?>"><span class="number-circle"><?php echo $num+4; ?></span> <?php echo $value[4]->brand ?>
+												    </a>
+												</td>
 												<?php } ?>
 												<?php if(!empty($value[5]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+5; ?></span> <?php echo $value[5]->brand ?></td>
+												<td>
+													<a href="brand/<?php echo $value[5]->slug ?>"><span class="number-circle"><?php echo $num+5; ?></span> <?php echo $value[5]->brand ?>
+												    </a>
+												</td>
 												<?php } ?>
 											</tr>
 											<tr>
 												<?php if(!empty($value[6]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+6; ?></span> <?php echo $value[6]->brand ?></td>
+												<td><a href="brand/<?php echo $value[6]->slug ?>"><span class="number-circle"><?php echo $num+6; ?></span> <?php echo $value[6]->brand ?></a></td>
 												<?php } ?>
 												<?php if(!empty($value[7]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+7; ?></span> <?php echo $value[7]->brand ?></td>
+												<td><a href="brand/<?php echo $value[7]->slug ?>"><span class="number-circle"><?php echo $num+7; ?></span> <?php echo $value[7]->brand ?></a></td>
 												<?php } ?>
 												<?php if(!empty($value[8]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+8; ?></span> <?php echo $value[8]->brand ?></td>
+												<td><a href="brand/<?php echo $value[8]->slug ?>"><span class="number-circle"><?php echo $num+8; ?></span> <?php echo $value[8]->brand ?></a></td>
 												 <?php } ?>
 											</tr>
 											<tr>
 												<?php if(!empty($value[9]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+9; ?></span> <?php echo $value[9]->brand ?></td>
+												<td><a href="brand/<?php echo $value[9]->slug ?>"><span class="number-circle"><?php echo $num+9; ?></span> <?php echo $value[9]->brand ?></a></td>
 												<?php } ?>
 												<?php if(!empty($value[10]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+10; ?></span> <?php echo $value[10]->brand ?></td>
+												<td><a href="brand/<?php echo $value[10]->slug ?>"><span class="number-circle"><?php echo $num+10; ?></span> <?php echo $value[10]->brand ?></a></td>
 												<?php } ?>
 												<?php if(!empty($value[11]->brand)){ ?>
-												<td><span class="number-circle"><?php echo $num+11; ?></span> <?php echo $value[11]->brand ?></td>
+												<td><a href="brand/<?php echo $value[11]->slug ?>"><span class="number-circle"><?php echo $num+11; ?></span> <?php echo $value[11]->brand ?></a></td>
 												 <?php } ?>
 											</tr>
 										</tbody>
