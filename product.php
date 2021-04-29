@@ -121,8 +121,9 @@ $ppResult = $obj->fetchNextObject($ppSql);
 				<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
 					<div class="review-heading">REVIEWS</div>
 					<p class="mb-20">There are no reviews yet.</p>
-					<form name="reviewFrm" class="review-form">
-						<div class="form-group">
+					<form name="reviewFrm" class="review-form rattingcls">
+					<input type="hidden" name="product_id" id="product_id" value="<?php echo $pResult->id; ?>">
+						<div class="form-group rattingcls">
 							<label>Your rating</label>
 							<div class="reviews-counter">
 								<div class="rate">
@@ -141,21 +142,24 @@ $ppResult = $obj->fetchNextObject($ppSql);
 						</div>
 						<div class="form-group">
 							<label>Your message</label>
-							<textarea class="form-control" rows="10"></textarea>
+							<textarea name="msg" id="msg" class="form-control" rows="10"></textarea>
+							<span id="errormsg"></span>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" name="" class="form-control" placeholder="Name*">
+									<input type="text" name="name" id="name" class="form-control" placeholder="Name*">
+									<span id="errorname"></span>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" name="" class="form-control" placeholder="Email Id*">
+									<input type="text" name="email" id="email" class="form-control" placeholder="Email Id*">
+									<span id="erroremail"></span>
 								</div>
 							</div>
 						</div>
-						<button class="round-black-btn">Submit Review</button>
+						<button type="button" id="rattingbtn" class="round-black-btn">Submit Review</button>
 					</form>
 					<ul class="product_reviews">
 						<li>
@@ -227,5 +231,50 @@ function changeItemPrice(id, pid) {
 		}
 	});
 }
+
+$(document).ready(function(){
+	$("#rattingbtn").click(function(){
+		if($("#msg").val()==''){
+			$("#errormsg").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> Please enter message !</div>');
+			return;
+		}else{
+			$("#errormsg").html(' ');
+		}
+		if($("#name").val()==''){
+			$("#errorname").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> Please enter name !</div>');
+			return;
+		}else{
+			$("#errorname").html(' ');
+		}
+		if($("#email").val()==''){
+			$("#erroremail").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> Please enter email !</div>');
+			return;
+		}else{
+			$("#erroremail").html(' ');
+
+			var product_id = $("#product_id").val();
+			var name = $("#name").val();
+			var email = $("#email").val();
+			var msg = $("#msg").val();
+			$.ajax({
+				url:"ajax/saveRatting.php",
+				data:{product_id:product_id,name:name,email:email,msg:msg},
+				beforeSend:function(){
+				
+				},
+				success:function(data){
+					console.log();
+					if(data==1){
+						$(".rattingcls").hide();
+						$("#successMsg").html();
+					}
+				}
+			})
+		}
+
+		
+		
+	})
+})
 </script>
 

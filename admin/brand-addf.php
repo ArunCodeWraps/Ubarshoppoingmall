@@ -9,7 +9,7 @@ validate_admin();
 if($_REQUEST['submitForm']=='yes'){
   $cat_id=$obj->escapestring($_POST['cat_id']);
   $brand=$obj->escapestring($_POST['brand']);
-  $slug = generateSlug($brand);
+  $slug = getField('slug',$tbl_category,$cat_id)."-".generateSlug($brand);
 
   $Image= new SimpleImage();
   if($_FILES['photo']['size']>0 && $_FILES['photo']['error']==''){

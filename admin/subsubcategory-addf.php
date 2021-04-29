@@ -17,7 +17,7 @@ if($_REQUEST['submitForm']=='yes')
 $cat_id = $obj->escapestring($_POST['cat_id']);
 $subcat_id = $obj->escapestring($_POST['subcat_id']);
 $subsubcategory=$obj->escapestring($_POST['subsubcategory']);
-$slug = generateSlug($subcategory);
+$slug = getField('slug',$tbl_subcategory,$subcat_id)."-".generateSlug($subsubcategory);
 $meta_tags=$obj->escapestring($_POST['meta_tags']);
 
 if($_FILES['image_upload_file']['tmp_name'])
